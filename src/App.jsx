@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom'
 import CartPage from "./pages/CartPage";
 import Home from './pages/Home';
 import ProductDetails from './pages/ProductDetails';
-import Setting from './pages/Settings';
 import Layout from './Layout/Layout';
 function App() {
   return (
