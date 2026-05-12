@@ -12,7 +12,6 @@ function App() {
         <Route index element={<Home />} />
         <Route path='/cart' element={<CartPage />} />
         <Route path='/product/:id' element={<ProductDetails />} />
-        <Route path='/settings' element={<Setting />} />
 
       </Route>
 
