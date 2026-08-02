@@ -15,10 +15,10 @@ export default function HomePage() {
         staleTime: 1000 * 60 * 5, // cache for 5 minutes
     });
     const [selectedCategory, setSelectedCategory] = useState("all");
-    const categories = ["all", ...new Set(products.map(p => p.category))];
+    const categories = ["all", ...new Set((products ?? []).map(p => p.category))];
     const filteredProducts =
-        selectedCategory === "all" ? products
-            : products.filter(p => p.category === selectedCategory);
+        selectedCategory === "all" ? (products ?? [])
+            : (products ?? []).filter(p => p.category === selectedCategory);
     return (
         <Box sx={{ maxWidth: 1280, mx: "auto", px: 3, py: 4 }}>
             <Stack direction={"row"} spacing={1} sx={{ mb: 3, flexWrap: "wrap" }}>
