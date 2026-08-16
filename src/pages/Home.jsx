@@ -37,94 +37,10 @@ export default function HomePage() {
     });
 
     const [selectedCategory, setSelectedCategory] = useState("all");
-    const [sortBy, setSortBy] = useState("newest");
-    const [page, setPage] = useState(1);
-    const [filtersOpen, setFiltersOpen] = useState(false);
-    const [filters, setFilters] = useState(getDefaultFilters());
-
-    useSEO({
-        title: searchQuery ? `Search: ${searchQuery}` : "All Products",
-        description:
-            "Browse our full product catalog — filter by price, rating, brand, and availability, or search for exactly what you need.",
-    });
-
-    const categories = useMemo(
-        () => ["all", ...new Set((products ?? []).map((p) => p.category))],
-        [products]
-    );
-
-    const filteredProducts = useMemo(() => {
-        let list = products ?? [];
-
-        if (searchQuery.trim()) {
-            const q = searchQuery.trim().toLowerCase();
-            list = list.filter(
-                (p) =>
-                    p.title.toLowerCase().includes(q) ||
-                    p.category?.toLowerCase().includes(q) ||
-                    p.brand?.toLowerCase().includes(q) ||
-                    p.description?.toLowerCase().includes(q)
-            );
-        }
-
-        if (selectedCategory !== "all") {
-            list = list.filter((p) => p.category === selectedCategory);
-        }
-
-        list = list.filter(
-            (p) => p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1]
-        );
-
-        if (filters.minRating > 0) {
-            list = list.filter((p) => (p.rating ?? 0) >= filters.minRating);
-        }
-
-        if (filters.brands.length > 0) {
-            list = list.filter((p) => filters.brands.includes(p.brand));
-        }
-
-        if (filters.inStockOnly) {
-            list = list.filter((p) => p.stock > 0);
-        }
-
-        return sortProducts(list, sortBy);
-    }, [products, searchQuery, selectedCategory, filters, sortBy]);
-
-    const pageCount = Math.max(1, Math.ceil(filteredProducts.length / PAGE_SIZE));
-    const pagedProducts = useMemo(
-        () => paginate(filteredProducts, page, PAGE_SIZE),
-        [filteredProducts, page]
-    );
-
-    const handleCategoryChange = (cat) => {
-        setSelectedCategory(cat);
-        setPage(1);
-    };
-
-    const handleFiltersChange = (next) => {
-        setFilters(next);
-        setPage(1);
-    };
-
-    const handleClearFilters = () => {
-        setFilters(getDefaultFilters());
-        setPage(1);
-    };
-
-    const handleClearSearch = () => {
-        setSearchParams({});
-        setPage(1);
-    };
-
-    const filtersContent = (
-        <ProductFilters
-            products={products ?? []}
-            filters={filters}
-            onChange={handleFiltersChange}
-            onClear={handleClearFilters}
-        />
-    );
-
+    const categories = ["all", ...new Set(products.map(p => p.category))];
+    const filteredProducts =
+        selectedCategory === "all" ? products
+            : products.filter(p => p.category === selectedCategory);
     return (
         <Box sx={{ maxWidth: 1280, mx: "auto", px: 3, py: 4 }}>
             {searchQuery ? (
