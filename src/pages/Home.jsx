@@ -36,11 +36,69 @@ export default function HomePage() {
         staleTime: 1000 * 60 * 5, // cache for 5 minutes
     });
 
+    // ensure we always operate on an array to avoid runtime errors
+    const productsList = products ?? [];
+
     const [selectedCategory, setSelectedCategory] = useState("all");
-    const categories = ["all", ...new Set(products.map(p => p.category))];
-    const filteredProducts =
-        selectedCategory === "all" ? products
-            : products.filter(p => p.category === selectedCategory);
+    const [filters, setFilters] = useState(() => getDefaultFilters());
+    const [sortBy, setSortBy] = useState("newest");
+    const [page, setPage] = useState(1);
+    const [filtersOpen, setFiltersOpen] = useState(false);
+
+    const categories = ["all", ...new Set(productsList.map((p) => p.category))];
+
+    // apply basic category filtering
+    let filteredProducts =
+        selectedCategory === "all" ? productsList : productsList.filter((p) => p.category === selectedCategory);
+
+    // apply search query
+    if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filteredProducts = filteredProducts.filter((p) => (p.title || "").toLowerCase().includes(q));
+    }
+
+    // apply advanced filters
+    filteredProducts = filteredProducts.filter((p) => {
+        const inPrice = p.price >= filters.priceRange[0] && p.price <= filters.priceRange[1];
+        const meetsRating = (p.rating ?? 0) >= (filters.minRating || 0);
+        const matchesBrand = filters.brands.length ? filters.brands.includes(p.brand) : true;
+        const inStock = filters.inStockOnly ? p.stock > 0 : true;
+        return inPrice && meetsRating && matchesBrand && inStock;
+    });
+
+    // derived values for pagination/sort
+    const sorted = sortProducts(filteredProducts, sortBy);
+    const pageCount = Math.max(1, Math.ceil(sorted.length / PAGE_SIZE));
+    const pagedProducts = paginate(sorted, page);
+
+    const handleCategoryChange = (cat) => {
+        setSelectedCategory(cat);
+        setPage(1);
+    };
+
+    const handleClearFilters = () => {
+        setFilters(getDefaultFilters());
+        setSelectedCategory("all");
+        setPage(1);
+    };
+
+    const handleClearSearch = () => {
+        const params = Object.fromEntries([...searchParams]);
+        delete params.q;
+        setSearchParams(params);
+    };
+
+    const filtersContent = (
+        <ProductFilters
+            products={productsList}
+            filters={filters}
+            onChange={(next) => {
+                setFilters(next);
+                setPage(1);
+            }}
+            onClear={() => handleClearFilters()}
+        />
+    );
     return (
         <Box sx={{ maxWidth: 1280, mx: "auto", px: 3, py: 4 }}>
             {searchQuery ? (
