@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
     Card,
     CardMedia,
@@ -8,21 +9,23 @@ import {
     Box,
     Chip,
     Rating,
-
 } from "@mui/material";
-import { ShoppingCart, AddShoppingCart, ArrowForward } from "@mui/icons-material";
+import { ShoppingCart, AddShoppingCart } from "@mui/icons-material";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../features/cartSlice";
 import { useNavigate } from "react-router-dom";
+import WishlistButton from "../wishlist/WishlistButton";
 
-export default function ProductCard({ product, view }) {
+function ProductCard({ product, view }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const inCart = useSelector((state) =>
         state.cart.items.find((item) => item.id === product.id)
     );
+
+    const outOfStock = product.stock === 0;
 
     const handleAddToCart = (e) => {
         e.stopPropagation();
@@ -56,6 +59,8 @@ export default function ProductCard({ product, view }) {
                     component="img"
                     image={product.thumbnail || product.image}
                     alt={product.title}
+                    loading="lazy"
+                    decoding="async"
                     sx={{
                         width: 90,
                         height: 90,
@@ -79,19 +84,28 @@ export default function ProductCard({ product, view }) {
                             precision={0.5}
                         />
                     )}
+                    {outOfStock && (
+                        <Chip label="Out of Stock" size="small" color="error" sx={{ mt: 0.5 }} />
+                    )}
                 </Box>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 2, flexShrink: 0 }}>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}>
                     <Typography variant="h6" color="primary" fontWeight={700}>
                         ${product.price}
                     </Typography>
+                    <WishlistButton
+                        product={product}
+                        size="small"
+                        sx={{ backgroundColor: "transparent", "&:hover": { backgroundColor: "action.hover" } }}
+                    />
                     <Button
                         variant={inCart ? "outlined" : "contained"}
                         color="success"
                         size="small"
+                        disabled={outOfStock}
                         startIcon={<ShoppingCart />}
                         onClick={handleAddToCart}
                     >
-                        {inCart ? `In Cart (${inCart.quantity})` : "Add"}
+                        {outOfStock ? "Sold Out" : inCart ? `In Cart (${inCart.quantity})` : "Add"}
                     </Button>
                 </Box>
             </Card>
@@ -117,12 +131,29 @@ export default function ProductCard({ product, view }) {
                 },
             }}
         >
-            <CardMedia
-                component="img"
-                image={product.thumbnail || product.image}
-                alt={product.title}
-                sx={{ height: 180, objectFit: "contain", p: 2 }}
-            />
+            <Box sx={{ position: "relative" }}>
+                <CardMedia
+                    component="img"
+                    image={product.thumbnail || product.image}
+                    alt={product.title}
+                    loading="lazy"
+                    decoding="async"
+                    sx={{ height: 180, objectFit: "contain", p: 2 }}
+                />
+                <WishlistButton
+                    product={product}
+                    size="small"
+                    sx={{ position: "absolute", top: 8, right: 8 }}
+                />
+                {outOfStock && (
+                    <Chip
+                        label="Out of Stock"
+                        size="small"
+                        color="error"
+                        sx={{ position: "absolute", top: 8, left: 8 }}
+                    />
+                )}
+            </Box>
             <CardContent sx={{ flex: 1 }}>
                 <Chip
                     label={product.category}
@@ -156,13 +187,15 @@ export default function ProductCard({ product, view }) {
                     variant={inCart ? "outlined" : "contained"}
                     color="success"
                     size="small"
+                    disabled={outOfStock}
                     startIcon={<AddShoppingCart />}
                     onClick={handleAddToCart}
                 >
-                    {inCart ? `In Cart (${inCart.quantity})` : "Add to Cart"}
+                    {outOfStock ? "Sold Out" : inCart ? `In Cart (${inCart.quantity})` : "Add to Cart"}
                 </Button>
             </CardActions>
-
         </Card>
     );
 }
+
+export default memo(ProductCard);
