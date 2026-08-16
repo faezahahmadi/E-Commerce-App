@@ -12,7 +12,7 @@ import {
 import { DeleteOutline, ShoppingCartOutlined, FavoriteBorder } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeItem, clearWishlist } from "../features/wishlistSlice";
+import { removeItem, clearWishlist } from "../features/WishlistSlice";
 import { addItem as addToCart } from "../features/cartSlice";
 import EmptyState from "../components/common/EmptyState";
 import { useSEO } from "../hooks/useSEO";

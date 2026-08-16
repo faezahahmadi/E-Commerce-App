@@ -1,7 +1,7 @@
 import { IconButton, Tooltip } from "@mui/material";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleItem } from "../../features/wishlistSlice";
+import { toggleItem } from "../../features/WishlistSlice";
 
 export default function WishlistButton({ product, size = "medium", sx = {} }) {
     const dispatch = useDispatch();
