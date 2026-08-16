@@ -176,6 +176,7 @@ export default function CartPage() {
                         fullWidth
                         size="large"
                         sx={{ mt: 3 }}
+                        onClick={() => navigate("/checkout")}
                     >
                         Checkout
                     </Button>
