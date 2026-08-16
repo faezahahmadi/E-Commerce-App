@@ -22,8 +22,8 @@ const appReducer = (state, action) => {
 
 export const ThemeContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(appReducer, initialState);
-    const theme = useMemo(() => {
-        return createTheme({
+    const theme = useMemo(() =>
+        createTheme({
             palette: {
                 mode: state.mode,
                 ...(state.mode === "dark"
@@ -32,7 +32,7 @@ export const ThemeContextProvider = ({ children }) => {
                             main: "#0f3d2e",
                             light: "#298d6c",
                             dark: "#0a2a20",
-                            contrastText: "#e8f5e9"
+                            contrastText: "#e8f5e9",
                         },
                         secondary: {
                             main: '#4CAF50',
@@ -47,11 +47,8 @@ export const ThemeContextProvider = ({ children }) => {
                             disabled: '#5C6F68',
                         },
                         divider: 'rgba(76, 175, 80, 0.2)',
-
                     }
                     : {
-
-                        //  LIGHT MODE
                         primary: {
                             main: '#2ECC71',
                             light: '#58D68D',
@@ -98,7 +95,6 @@ export const ThemeContextProvider = ({ children }) => {
                             },
                         },
                     },
-
                     MuiPaper: {
                         styleOverrides: {
                             root: {
@@ -113,12 +109,10 @@ export const ThemeContextProvider = ({ children }) => {
                             },
                         },
                     },
-
-
-                }
-            }
-        }, [state.mode])
-    })
+                },
+            },
+        }), [state.mode]
+    )
 
     return <themeContext.Provider value={{ state, dispatch }}>
         <ThemeProvider theme={theme}>
