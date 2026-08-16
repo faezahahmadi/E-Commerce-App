@@ -197,13 +197,23 @@ npm run preview
 
 ## 📸 Screenshots
 
-<img width="1366" height="674" alt="2" src="https://github.com/user-attachments/assets/7bd8baf1-c864-4353-8406-27838e0f1eb4" />
 <img width="1355" height="730" alt="1" src="https://github.com/user-attachments/assets/ec5253b8-185b-4cba-9f24-27a1af2bfe3a" />
-<img width="1359" height="727" alt="8" src="https://github.com/user-attachments/assets/d51c002f-d93d-4d7c-a9c2-df42adbd6c7c" />
-<img width="1366" height="726" alt="7" src="https://github.com/user-attachments/assets/e5d9baec-d113-4225-bc27-234b98f0b3f1" />
 <img width="1366" height="728" alt="6" src="https://github.com/user-attachments/assets/eca79937-e81d-4938-a86e-3518c9375f02" />
 <img width="1366" height="599" alt="5" src="https://github.com/user-attachments/assets/5305169a-2ae2-4ce4-8390-be94b60b17bf" />
+<img width="1292" height="601" alt="13" src="https://github.com/user-attachments/assets/ece7c7a4-b60d-4188-95f5-df0b67b515ca" />
 <img width="1366" height="642" alt="4" src="https://github.com/user-attachments/assets/5c359058-bf91-4cdc-9a99-4370a79b7e9c" />
 <img width="1366" height="736" alt="3" src="https://github.com/user-attachments/assets/665afbe9-a124-4a43-a4f4-37abdaa62b3a" />
+<img width="1366" height="647" alt="11" src="https://github.com/user-attachments/assets/5b4722d6-74d3-4bfb-bde8-77cab35ef11d" />
+<img width="1363" height="629" alt="10" src="https://github.com/user-attachments/assets/886cd87a-d365-4f6e-b642-ec61fbfa709d" />
+<img width="1366" height="650" alt="9" src="https://github.com/user-attachments/assets/9a506005-b9e1-4b19-87b4-a2f06a234c6e" />
+<img width="1349" height="630" alt="8" src="https://github.com/user-attachments/assets/0bca7c3a-a07f-438c-912b-17327d331f42" />
+<img width="1366" height="600" alt="7" src="https://github.com/user-attachments/assets/e02e7412-d8c3-4028-bb6c-1be7b0a4aa76" />
+<img width="1366" height="633" alt="6" src="https://github.com/user-attachments/assets/cc815888-b2ab-4497-8ccb-8e419022fd1b" />
+<img width="1366" height="661" alt="5" src="https://github.com/user-attachments/assets/0229b655-68c3-4c3f-85a1-73a5f013f392" />
+<img width="1320" height="656" alt="4" src="https://github.com/user-attachments/assets/c83336a9-4721-44df-ac92-bc7dcb18bdb5" />
+<img width="1346" height="647" alt="3" src="https://github.com/user-attachments/assets/5bb32648-555d-4cec-8faf-d04c68fcb7ed" />
+<img width="1366" height="686" alt="2" src="https://github.com/user-attachments/assets/8874f76c-d2ef-4d94-a4db-9e24a7fe9699" />
+<img width="1353" height="696" alt="1" src="https://github.com/user-attachments/assets/c32e3257-664c-4d77-b892-d08cb678dede" />
+<img width="1366" height="647" alt="12" src="https://github.com/user-attachments/assets/518bab06-374a-4828-b4ba-bd90e3ef918d" />
 
-*(Screenshots reflect the original product catalog UI — new pages like Checkout, Order Confirmation, and Wishlist aren't pictured yet.)*
+
